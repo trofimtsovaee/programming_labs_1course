@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 
 typedef struct Vector {
+    char name[10];
     int x;
     int y;
     int z;
@@ -14,19 +16,16 @@ double vectorModule(Vector);
 void printVector(Vector);
 
 int main() {
-    Vector a = {1, 2, 3};
-    Vector b = {4, 5, 6};
+    Vector a = {"a", 1, 2, 3};
+    Vector b = {"b", 4, 5, 6};
     int sc_prod = scalarMultiplyVectors(a, b);
     Vector vec_prod = vectorMultiplyVectors(a, b);
     double a_mod = vectorModule(a);
     double b_mod = vectorModule(b);
 
-    printf("a = ");
     printVector(a);
-    printf("b = ");
     printVector(b);
     printf("a • b = %d\n", sc_prod);
-    printf("a × b = ");
     printVector(vec_prod);
     printf("|a| = %.3lf\n", a_mod);
     printf("|b| = %.3lf\n", b_mod);
@@ -40,6 +39,9 @@ int scalarMultiplyVectors(Vector a, Vector b) {
 
 Vector vectorMultiplyVectors(Vector a, Vector b) {
     Vector res;
+    strcpy(res.name, a.name);
+    strcat(res.name, " × ");
+    strcat(res.name, b.name);
     res.x = a.y * b.z - a.z * b.y;
     res.y = -(a.x * b.z - a.z * b.x);
     res.z = a.x * b.y - a.y * b.x;
@@ -51,5 +53,5 @@ double vectorModule(Vector a) {
 }
 
 void printVector(Vector a) {
-    printf("(%d, %d, %d)\n", a.x, a.y, a.z);
+    printf("%s = (%d, %d, %d)\n", a.name, a.x, a.y, a.z);
 }

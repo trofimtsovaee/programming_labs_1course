@@ -32,7 +32,6 @@ int main() {
 
     BirthDate bd = {day, month, year - START_YEAR};
     printf("Your birthdate: %d.%d.%d\n", bd.day, bd.month, bd.year + START_YEAR);
-    printf("sizeof(BirthDate): %lu\n", sizeof(BirthDate));
 
     return EXIT_SUCCESS;
 }
